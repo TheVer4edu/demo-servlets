@@ -24,8 +24,8 @@
 <hr/>
 <% if(!path.equals("/")) {%>
 <img src="https://img.icons8.com/color/24/000000/folder-tree.png"/>
-<a href="<%=String.format("%s?path=%s",
-        baseurl,
+<a href="<%=String.format("?path=%s",
+        //baseurl,
         Directory.getParent(path))%>">Вверх</a>
 <br/>
 <% } %>
@@ -33,8 +33,8 @@
     <tr><th></th><th>Filename</th><th>Size</th><th>Last change</th></tr>
 <% if (dir != null)
     for (FileInfo info : dir)   {%>
-    <%String url = String.format("%s?path=%s%s%s",
-            baseurl,
+    <%String url = String.format("?path=%s%s%s",
+            //baseurl,
             path,
             info.getName(),
             info.isDirectory() ? "/" : "&download=true");%>

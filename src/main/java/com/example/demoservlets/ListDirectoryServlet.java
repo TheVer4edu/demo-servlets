@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@WebServlet(name = "ListDirectoryServlet", value = "/list")
+@WebServlet(name = "ListDirectoryServlet", value = "/ListDirectoryServlet", urlPatterns = {"/list"})
 public class ListDirectoryServlet extends HttpServlet {
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -51,7 +51,7 @@ public class ListDirectoryServlet extends HttpServlet {
                 Date date = new Date(System.currentTimeMillis());
                 request.setAttribute("date", formatter.format(date));
                 request.setAttribute("path", path);
-                request.setAttribute("baseurl", request.getRequestURI());
+                request.setAttribute("baseurl", request.getRequestURL().toString());
                 request.setAttribute("directory", Directory.listDirectory(path));
                 getServletContext().getRequestDispatcher("/directory.jsp").forward(request, response);
             }
