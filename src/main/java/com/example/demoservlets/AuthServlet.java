@@ -6,6 +6,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Objects;
 
 @WebServlet(name = "AuthServlet", value = "/AuthServlet", urlPatterns = {"/login", "/signup"})
@@ -84,7 +85,7 @@ public class AuthServlet extends HttpServlet {
                     return;
                 }
 
-                UserProfile profile = new UserProfile(login, pass, email);
+                UserProfile profile = new UserProfile(login.toLowerCase(Locale.ROOT), pass, email);
                 accountService.addNewUser(profile);
                 accountService.addSession(request.getSession().getId(), profile);
                 response.getWriter().println(new MessagesService("redirect", "list"));
