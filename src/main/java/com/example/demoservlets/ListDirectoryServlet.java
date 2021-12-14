@@ -46,7 +46,7 @@ public class ListDirectoryServlet extends HttpServlet {
 
         if (!filePathRepr.startsWith(homeDirectory) || filePathRepr.contains("..") ){
 //            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().println(new MessagesService("Ошибка", "Вы собираетесь зайти слишком далеко. Не пущу!"));
+            response.getWriter().println(new MessagesService("Error", "You can't access directory above your home"));
             return;
         }
 

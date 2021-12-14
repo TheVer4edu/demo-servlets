@@ -1,5 +1,9 @@
 package com.example.demoservlets;
 
+import com.example.demoservlets.orm.User;
+import com.example.demoservlets.orm.UsersDAO;
+import com.example.demoservlets.orm.UsersDAOImplementation;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -7,15 +11,16 @@ import java.util.Locale;
 import java.util.Map;
 
 public class AccountService {
-    private final DatabaseConnectivity dbc;
-    private final Map<String, UserProfile> loginToProfile;
+    //private final DatabaseConnectivity dbc;
+    private static UsersDAO dao = new UsersDAOImplementation();
+    //private final Map<String, UserProfile> loginToProfile;
     private final Map<String, UserProfile> sessionIdToProfile;
 
     public AccountService() {
-        this.dbc = new DatabaseConnectivity();
-        this.loginToProfile = new HashMap<>();
+/*        this.dbc = new DatabaseConnectivity();
+        this.loginToProfile = new HashMap<>();*/
         this.sessionIdToProfile = new HashMap<>();
-
+/*
         try {
             ResultSet rs = dbc.getStatement().executeQuery("SELECT * FROM `users`");
             while (rs.next()) {
@@ -27,11 +32,13 @@ public class AccountService {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void addNewUser(UserProfile userProfile) {
-        loginToProfile.put(userProfile.getLogin().toLowerCase(Locale.ROOT), userProfile);
+        dao.add(new User(userProfile.getLogin(), userProfile.getPass(), userProfile.getEmail()));
+
+/*        loginToProfile.put(userProfile.getLogin().toLowerCase(Locale.ROOT), userProfile);
         try {
             dbc.getStatement().executeUpdate(
                     String.format(
@@ -41,11 +48,20 @@ public class AccountService {
                             userProfile.getPass()));
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public UserProfile getUserByLogin(String login) {
-        return loginToProfile.get(login.toLowerCase(Locale.ROOT));
+        String finalLogin = login.toLowerCase(Locale.ROOT);
+        UserProfile result = null;
+        try {
+            User user =  dao.getAll().stream().filter(x -> x.getLogin().toLowerCase(Locale.ROOT).equals(finalLogin)).findFirst().get();
+            result = new UserProfile(user.getLogin(), user.getPassword(), user.getEmail());
+        }
+        catch (Exception e) {}
+        return result;
+
+        //  return loginToProfile.get(login.toLowerCase(Locale.ROOT));
     }
 
     public UserProfile getUserBySessionId(String sessionId) {
