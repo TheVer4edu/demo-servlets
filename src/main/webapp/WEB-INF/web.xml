@@ -21,6 +21,11 @@
         <servlet-class>com.example.demoservlets.AuthServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>ListDirectoryServlet</servlet-name>
+        <servlet-class>com.example.demoservlets.ListDirectoryServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>CoreServlet</servlet-name>
         <url-pattern>/</url-pattern>
@@ -35,9 +40,9 @@
         <servlet-name>AuthServlet</servlet-name>
         <url-pattern>/signup</url-pattern>
     </servlet-mapping>
-
+    
     <servlet-mapping>
-        <servlet-name>AuthServlet</servlet-name>
-        <url-pattern>/api/*</url-pattern>
+        <servlet-name>ListDirectoryServlet</servlet-name>
+        <url-pattern>/list</url-pattern>
     </servlet-mapping>
 </web-app>

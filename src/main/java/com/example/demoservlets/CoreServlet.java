@@ -25,7 +25,7 @@ public class CoreServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String sessionId = request.getSession().getId();
         UserProfile profile = accountService.getUserBySessionId(sessionId);
-
+        getServletContext().setAttribute("accountService", accountService);
         response.sendRedirect(profile == null ? "login" : "list");
 
 /*        response.setContentType("text/html");

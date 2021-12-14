@@ -21,21 +21,21 @@
                 <form method="POST">
                     <div class="label_input">
                         <label for="login_input">Your login</label>
-                        <input id="login_input" type="text" placeholder="Enter your login" class="input" />
+                        <input id="login_input" type="text" name="login" placeholder="Enter your login" class="input" />
                     </div>
 
                     <div class="label_input">
                         <label for="email_input">Your Email</label>
-                        <input id="email_input" type="text" placeholder="Enter your e-mail" class="input" />
+                        <input id="email_input" type="text" name="email" placeholder="Enter your e-mail" class="input" />
                     </div>
 
                     <div class="label_input">
                         <label for="password_input">Your password</label>
-                        <input id="password_input" type="password" placeholder="Enter your password" class="input" />
+                        <input id="password_input" type="password" name="password" placeholder="Enter your password" class="input" />
                     </div>
 
                     <button type="submit" class="button_grey">Submit form</button>
-                    <a class="bottom_link" href="/login">I have an account already</a>
+                    <a class="bottom_link" href="login">I have an account already</a>
                 </form>
             </div>
         </div>
